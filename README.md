@@ -1,5 +1,5 @@
 # Distributed-OS-Assignment
-Assignment of group 22 for Distributed OS / Winter Semester 2021-2022
+Assignment of group 22 for Distributed OS / Winter Semester 2021-2022, HUA
 @Authors: it21966, it21920, it21998
 
 Η εφαρμογή είναι επίσης deployed μέσο του Heroku με βάση στο freemysql και μπορείτε να συνδεθείτε μέσο του ακόλουθου συνδέσμου:
