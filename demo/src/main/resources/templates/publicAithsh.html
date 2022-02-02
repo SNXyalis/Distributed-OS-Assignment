@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/nstyle.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="./images/favicon/site.webmanifest">
+        <link rel="mask-icon" href="./images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <title> Νέα Αίτηση</title>
+        <meta charset="utf-8">
+        <meta name="author" 
+         content="Stylianos X.">
+        <meta name="description" 
+         content="A web application to register and access books from a database">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+       <style>
+           body {
+               height: 100%;
+               margin: 0;
+               /*overflow: hidden;*/
+               overflow-x: hidden; /*no scroll deksia aristera*/
+               font-family: Arial, Helvetica, sans-serif;
+               background-color: #ffffff;
+               color: #333;
+               min-height: 100vh;
+               display: flex;
+               flex-direction: column;
+           }
+
+           /* Full-width input fields */
+           input[type=email], input[type=password] {
+               width: 100%;
+               padding: 12px;
+               margin: 8px 0;
+               display: inline-block;
+               border: 1px solid #ccc;
+               box-sizing: border-box;
+           }
+
+           /* Extra styles for the cancel button */
+           .cancelbtn {
+               width: auto;
+               padding: 10px 18px;
+               background-color: #f44336;
+           }
+
+           .container {
+               padding: 16px;
+           }
+
+           /* The Modal (background) */
+           .modal {
+               display: none; /* Hidden by default */
+               position: fixed; /* Stay in place */
+               z-index: 1; /* Sit on top */
+               left: 0;
+               top: 0;
+               width: 100%; /* Full width */
+               height: 100%; /* Full height */
+               overflow: auto; /* Enable scroll if needed */
+               background-color: rgb(0,0,0); /* Fallback color */
+               background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+               padding-top: 60px;
+           }
+
+           /* Modal Content/Box */
+           .modal-content {
+               background-color: #fefefe;
+               margin: 5px auto; /* 15% from the top and centered */
+               padding: 25px 20px;
+               border: 1px solid #888;
+               width: 33%; /* Could be more or less, depending on screen size */
+           }
+
+           /* The Close Button (x) */
+           .close {
+               position: absolute;
+               right: 25px;
+               top: 0;
+               color: #000;
+               font-size: 35px;
+               font-weight: bold;
+           }
+
+           .close:hover,
+           .close:focus {
+               color: red;
+               cursor: pointer;
+           }
+
+           #logo {
+               border-radius: 50%;
+               margin: 0px 5px;
+           }
+
+           #dv-header-title {
+               display: flex;
+               align-items: center;
+               flex-direction: row;
+               flex-wrap: wrap;
+           }
+
+
+           /*Fix position of header desc*/
+           #dv-header-desc p{
+               margin: 5px 0px;
+           }
+
+           footer{
+               margin-top: auto;
+           }
+       </style>
+   </head>
+   <body>
+       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightgrey;">
+            <div class="container">
+                <div id="dv-header-title" class="navbar-brand">
+                    <div>
+                        <img id="logo" 
+                        src="./images/index.jpg" 
+                        alt="service logo"
+                        width="50px"
+                        height="50px"
+                        title="service logo">
+                    </div>
+                    <div id="dv-header-desc">
+                        <p>Υπηρεσία αιτήσεων <br/> φοιτητών για μεταπτυχιακό</p>
+                    </div>
+                </div>
+                
+                <button 
+                class="navbar-toggler " 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav"
+                >
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="dv-header-content">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/public-home">Αρχική</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/public-services">Yπηρεσίες</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/public-pgs"> Σπουδές Μεταπτυχιακού</a>
+                            </li>
+                            <li class="nav-item" id="lin">
+                                <a class="nav-link" href="/login"> Σύνδεση</a>
+                            </li>
+                            <li class="nav-item" id="lout" hidden>
+                                <a class="nav-link" href="/logout"> Αποσύνδεση</a>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <div id="id01" class="modal">
+                        <form action="">
+                           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                           <div class="container">
+                              <fieldset id="registerFS" class="modal-content">
+                                <input type="email" id="email" name="email" placeholder="Email">
+                                <input type="password" id="pwd" name="pwd" minlength="8" placeholder="Password">
+                                 <input type="button" value="Sign In" id="addBook">
+                                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                              </fieldset>
+                           </div>
+                        </form>
+                    </div>   
+                </div>
+            </div>
+       </nav>
+       <main class=" p-5 text-left" style="flex-grow: 1">
+            <div class="container">
+                <h2>Νέα Αίτηση</h2>
+
+                <form action="#"  class="needs-validation" novalidate>
+                <div class="form-group row">
+                    <div class="col-md-4 mb-3">
+                        <label for="validationCustom99">Πτυχίο</label>
+                        <input  type="text" class="form-control" id="validationCustom99" placeholder="Σύνδεσμος Πτυχίου" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom01">Βαθμός</label>
+                      <input  type="text" class="form-control" id="validationCustom01" placeholder="Βαθμός" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                </div>
+                    <div class="form-group row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom02">AM</label>
+                            <input  type="text" class="form-control" id="validationCustom02" placeholder="AM" required>
+                        </div>
+                        <div class="valid-feedback">
+                          Looks good!
+                       </div>
+                       <div class="col-md-4 mb-3">
+                            <label for="validationCustom03">Συστατική Επιστολή</label>
+                            <input  type="text" class="form-control" id="validationCustom03" placeholder="Σύνδεσμος συστατικών επιστολών" required>
+                        </div>
+                        <div class="valid-feedback">
+                          Looks good!
+                       </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom04">Πρόγραμμα μεταπτυχιακού</label>
+                            <input  type="text" class="form-control" id="validationCustom04" placeholder="Είσαγεται το πρόγραμμα μεταπτυχιακού" required>
+                        </div>
+                        <div class="valid-feedback">
+                          Looks good!
+                       </div>
+                    </div>
+                    
+                    <!--<button class="btn btn-primary" type="submit" >Submit</button>-->
+
+                </form>
+              
+                <button class="btn btn-primary" type="submit"  id="submitBtn" >Αποστολή</button>
+                <button hidden class="btn btn-primary" type="submit"  id="getIdBtn" >GetID</button>
+
+            </div>
+       </main>
+    <footer class="bd-footer py-5 mt-5" style="background-color: lightgrey;">
+        <div class="container">
+            <p>Contact: it21966, it21998, it21920</p>
+            <p>Copyright 2021, Distributed Systems | it21966, it21998, it21920</p>
+          </div>
+    </footer>
+    <script src="./scripts/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+          window.addEventListener('load', (event)=> {
+
+            document.getElementById('submitBtn').addEventListener('click', (event)=> {
+
+              //Create User and send request
+              var form = {
+                "programma_spoudwn": document.getElementById('validationCustom99').value,
+                "grade": document.getElementById('validationCustom01').value,
+                "am": document.getElementById('validationCustom02').value,
+                "epistoles": document.getElementById('validationCustom03').value,
+                "state": "pending",
+                "kateuthinsh": document.getElementById('validationCustom04').value
+              }              
+              if(form.programma_spoudwn =="" || form.grade==""|| form.am==""||form.epistoles==""||form.kateuthinsh==""){
+                  alert("Please fill all the fields");
+                }else {
+
+                const xhr= new XMLHttpRequest();
+                
+                xhr.open('POST', 'http://localhost:8000/aithsh', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(form));
+
+                xhr.onreadystatechange = function(){
+                        if(xhr.readyState == 4) {
+                            if(xhr.status == 201) {
+                                document.getElementById('getIdBtn').click();
+                                alert("Form added successfully");
+                            }
+                        }
+                };
+            }
+            })
+
+              document.getElementById('getIdBtn').addEventListener('click', (event)=> {
+
+                  const xhr= new XMLHttpRequest();
+
+                  xhr.open('GET', 'http://localhost:8000/aithsh', true);
+                  xhr.setRequestHeader('Content-Type', 'application/json');
+                  xhr.send();
+
+                  xhr.onreadystatechange = function(){
+                      if(xhr.readyState == 4) {
+                          if(xhr.status == 200) {
+
+                              var result = JSON.parse(xhr.responseText);
+
+                              let j = 0;
+                              result.forEach((item) => { //For each entry
+                                  j = 0;
+                                  j = item["id"];
+                              });
+
+                              alert("Your ID is " + j);
+                          }
+                      }
+                  };
+              })
+
+            /*document.getElementById('logout').addEventListener('click', (event)=> {
+                const xhr= new XMLHttpRequest();
+                
+                xhr.open('POST', 'http://localhost:8000/logout', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send();
+                xhr.onreadystatechange = function(){
+                        if(xhr.readyState == 4) {
+                            if(xhr.status == 204) {
+                                location.reload();
+                            }
+                        }
+                };
+                //location.reload(); 
+
+            })*/
+              if (sessionStorage.getItem('status') != null){
+                  document.getElementById('lin').hidden = true;
+                  document.getElementById('lout').hidden=false;
+              }
+
+              if (sessionStorage.getItem('status') == null){
+                  document.getElementById('lin').hidden = false;
+                  document.getElementById('lout').hidden= true;
+              }
+
+              document.getElementById('lin').addEventListener('click', (event)=>{
+                  sessionStorage.setItem('status', 'loggedIn')
+              })
+
+              document.getElementById('lout').addEventListener('click', (event)=>{
+                  sessionStorage.removeItem('status')
+              })
+          });
+        </script>
+  </body>
+</html>
