@@ -6,8 +6,27 @@ Assignment of group 22 for Distributed OS / Winter Semester 2021-2022
 
 https://distributed-systems-haro.herokuapp.com/public-home
 
+Admin
 username: root@hua.gr
 password: admin123
+
+Student:
+1.
+username: it21900@hua.gr
+password: pass21900
+
+2.
+username: it21922@hua.gr
+password: pass21922
+
+Teacher:
+username: mike@hua.gr
+password: pass1
+
+
+Secretary:
+username: sam@hua.gr
+password: pass2
 
 Προαπαιτούμενα:
 Εγκατάσταση τοπικής βάσης MySQL και χρήση των αντίστοιχων ρυθμίσεων.
